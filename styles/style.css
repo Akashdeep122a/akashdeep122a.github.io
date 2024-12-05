@@ -70,6 +70,7 @@ footer {
     width: 80%;
     max-width: 400px;
     animation: pop-up 0.3s ease-out;
+    display:inherit;
 }
 
 .close {
@@ -80,6 +81,7 @@ footer {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+    display:inherit;
 }
 
 /* Animation for Modal */
