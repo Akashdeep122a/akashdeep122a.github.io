@@ -1,9 +1,31 @@
-document.getElementById("contact-form").addEventListener("submit", function(event) {
+const form = document.getElementById("contact-form");
+const modal = document.getElementById("popup-modal");
+const closeModal = document.getElementById("close-modal");
+const messageInput = document.getElementById("message");
+const popupMessage = document.getElementById("popup-message");
+
+// Form submit event
+form.addEventListener("submit", function (event) {
     event.preventDefault();
-    const message = document.getElementById("message").value;
+    const message = messageInput.value.trim();
     if (message) {
-        alert("Thanks for sharing! I'll be waiting for your reply.");
+        popupMessage.textContent = "Thank you for sharing! I'll be waiting for your reply. 😊";
+        popupMessage.style.color = "black";
+        modal.style.display = "flex"; // Show the modal
     } else {
-        alert("Please write something before sending 😊.");
+        popupMessage.textContent = "Please write something before sending. 😊";
+        modal.style.display = "flex"; // Show the modal
+    }
+});
+
+// Close modal event
+closeModal.addEventListener("click", function () {
+    modal.style.display = "none";
+});
+
+// Close modal if clicking outside the content
+window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
     }
 });
