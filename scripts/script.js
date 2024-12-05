@@ -15,6 +15,7 @@ form.addEventListener("submit", function (event) {
     } else {
         popupMessage.textContent = "Please write something before sending. 😊";
         modal.style.display = "flex"; // Show the modal
+        popupMessage.style.color = "black";
     }
 });
 
