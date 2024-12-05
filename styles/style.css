@@ -60,6 +60,9 @@ footer {
     background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
     justify-content: center;
     align-items: center;
+    opacity: 0; /* Hidden by default */
+    transform: scale(0.8); /* Start smaller */
+    animation: pop-up 0.5s ease-out forwards; /* Apply the pop-up animation */
 }
 #hearts-canvas {
     position: fixed;
@@ -92,6 +95,10 @@ footer {
     display:inherit;
 }
 
+
+.modal.show {
+    display: flex; /* Show the modal with flex layout */
+}
 /* Animation for Modal */
 @keyframes pop-up {
     from {

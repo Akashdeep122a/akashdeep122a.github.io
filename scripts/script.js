@@ -8,13 +8,13 @@ const popupMessage = document.getElementById("popup-message");
 
 // Close modal event
 closeModal.addEventListener("click", function () {
-    modal.style.display = "none";
+    hideModal();
 });
 
 // Close modal if clicking outside the content
 window.addEventListener("click", function (event) {
     if (event.target === modal) {
-        modal.style.display = "none";
+        hideModal();
     }
 });
 
@@ -33,7 +33,7 @@ function createHeart() {
     const x = Math.random() * canvas.width;
     const y = -50; // Start above the visible area
     const size = Math.random() * 20 + 15; // Random size
-    const speed = Math.random() * 2 + 2; // Random falling speed
+    const speed = Math.random() * 2 + 1.5; // Random falling speed
     const opacity = Math.random() * 0.5 + 0.5; // Random opacity
     return { x, y, size, speed, opacity };
 }
@@ -76,11 +76,19 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas(); // Initial canvas size
 
 // Populate hearts array and start animation
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 15; i++) {
     hearts.push(createHeart());
 }
 animateHearts();
 
+function showModal() {
+    modal.classList.add("show");  // Add the 'show' class to trigger the transition
+}
+
+// Hide modal with smooth animation
+function hideModal() {
+    modal.classList.remove("show"); // Remove the 'show' class to trigger the fade-out
+}
 // Trigger the hearts animation when modal is shown
 form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -91,7 +99,16 @@ form.addEventListener("submit", function (event) {
         popupMessage.textContent = "Please write something before sending. 😊";
     }
     popupMessage.style.color = "black";
-    modal.style.display = "flex"; // Show the modal
+    showModal() // Show the modal
+    const promise = new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('Resolved after 5 seconds!');
+        }, 5000); // 10 seconds
+    });
+    promise.then((message) => {
+        hideModal();
+        console.log(message); // Logs: Resolved after 10 seconds!
+    });
     hearts = []; // Reset hearts
     for (let i = 0; i < 50; i++) {
         hearts.push(createHeart());
