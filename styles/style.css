@@ -5,6 +5,11 @@
     font-weight: normal;
 }
 
+
+.backgroundClass {
+    background-image: url("https://pageno3.wordpress.com/wp-content/uploads/2024/05/download2818291131391897398642731.jpg");
+
+}
 ::selection{
     background-color: #d51948;
     color: white;
@@ -42,7 +47,7 @@ h2{
 }
 
 body{
-    background-image: url("https://pageno3.wordpress.com/wp-content/uploads/2024/05/download2818291131391897398642731.jpg");
+    background-image: linear-gradient(to bottom right, #ff7eb3, #ef5f77);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -50,17 +55,52 @@ body{
 #menu{
     width: 100%;
 }
-.menu-xc, #menu-x{
-    width: 100%;
-    background: transparent;
-    box-shadow: 0px 0px 0px;
-}
+/*
 #drop-down-menu{
     overflow: hidden;
     height: 0px;
 }
-.menu-xc:hover{
+*/
+/* .menu-xc:hover{
     background-color: transparent;
+} 
+.menu-xc, #menu-x{
+    width: 100%;
+    background: transparent;
+    box-shadow: 0px 0px 0px;
+    align-self: left;
+} */
+
+.header-container {
+    display: flex;
+    justify-content: center; /* Center the heading horizontally */
+    align-items: center; /* Vertically align button and heading */
+    position: relative; /* Allows absolute positioning of the button */
+    width: 100%; /* Ensure container takes full width */
+}
+.menu-xc {
+    position: absolute; /* Position the button relative to the container */
+    left: 10px; /* Adjust as needed for distance from the left edge */
+    top: 50%; /* Vertically center the button */
+    transform: translateY(-50%); /* Correct vertical centering */
+    background: transparent;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.menu-xc:hover {
+    background-color: #d51948;
+}
+.header-text {
+    margin: 0;
+    color: white;
+    font-size: 2rem; /* Adjust font size */
 }
 
 /* Code by ghgtggamer - end */
@@ -80,6 +120,7 @@ header {
 h1 {
     font-size: 3rem;
     margin: 0;
+    justify-self: center;
 }
 main {
     margin: 2rem auto;
