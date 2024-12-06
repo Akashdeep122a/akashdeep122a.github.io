@@ -72,8 +72,8 @@ body{
 } */
 .menu-xc {
     position: absolute;
-    top: 0px; /* 10px from the top of the header */
-    left: 0px; /* 10px from the left of the header */
+    top: 0px; /* 0px from the top of the header */
+    left: 0px; /* 0px from the left of the header */
     background: transparent;
     color: white;
     padding: 0.5rem 1rem;
