@@ -110,10 +110,10 @@ form.addEventListener("submit", function (event) {
         hideModal();
         console.log(message); // Logs: Resolved after 10 seconds!
     });
-    hearts = []; // Reset hearts
-    for (let i = 0; i < 20; i++) {
-        hearts.push(createHeart());
-    }
+    // hearts = []; // Reset hearts
+    // for (let i = 0; i < 15; i++) {
+    //     hearts.push(createHeart());
+    // }
 });
 
 

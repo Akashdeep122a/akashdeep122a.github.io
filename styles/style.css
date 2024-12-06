@@ -5,10 +5,11 @@
     font-weight: normal;
 }
 
+
 .backgroundClass {
     background-image: url("https://pageno3.wordpress.com/wp-content/uploads/2024/05/download2818291131391897398642731.jpg");
-}
 
+}
 ::selection{
     background-color: #d51948;
     color: white;
@@ -31,6 +32,8 @@ h1{
     }
 }
 
+
+
 p{
     line-height: 25px;
     word-spacing: 1px;
@@ -52,21 +55,25 @@ body{
 #menu{
     width: 100%;
 }
-
-.header-container {
-    display: flex;
-    justify-content: center; /* Center the heading horizontally */
-    align-items: center; /* Vertically align button and heading */
-    position: relative; /* Allows absolute positioning of the button */
-    width: 100%; /* Ensure container takes full width */
-    padding: 0 20px; /* Add some horizontal padding */
+/*
+#drop-down-menu{
+    overflow: hidden;
+    height: 0px;
 }
-
+*/
+/* .menu-xc:hover{
+    background-color: transparent;
+} 
+.menu-xc, #menu-x{
+    width: 100%;
+    background: transparent;
+    box-shadow: 0px 0px 0px;
+    align-self: left;
+} */
 .menu-xc {
-    position: absolute; /* Position the button relative to the container */
-    left: 10px; /* Adjust as needed for distance from the left edge */
-    top: 50%; /* Vertically center the button */
-    transform: translateY(-50%); /* Correct vertical centering */
+    position: absolute;
+    top: 10px; /* 10px from the top of the header */
+    left: 10px; /* 10px from the left of the header */
     background: transparent;
     color: white;
     padding: 0.5rem 1rem;
@@ -77,15 +84,19 @@ body{
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s;
 }
-
 .menu-xc:hover {
     background-color: #d51948;
 }
-
+.header-container {
+    position: relative; /* Allow absolute positioning of the button */
+    text-align: center; /* Center the h1 */
+    margin-top: 1rem; /* Add some space at the top if necessary */
+}
 .header-text {
-    margin: 0;
+    margin: 0; /* Removes default margin for better alignment */
     color: white;
-    font-size: 2rem; /* Adjust font size */
+    font-size: 2rem; /* Adjust font size as needed */
+    
 }
 
 /* Code by ghgtggamer - end */
@@ -96,26 +107,27 @@ body {
     background: linear-gradient(to bottom right, #ff7eb3, #ef5f77);
     color: white;
     text-align: center;
-}
 
+}
 header {
-    padding: 1rem;
+    padding: 2rem;
     background: rgba(0, 0, 0, 0.5);
     /* backdrop-filter: blur(10px); */
 }
-
 h1 {
     font-size: 3rem;
     margin: 0;
-    justify-self: center;
+    color: white;
+    position: relative; /* Ensures it's centered in the container */
+    z-index: 1;
 }
-
 main {
     margin: 2rem auto;
     max-width: 600px;
 }
-
 section {
+    /* margin: 2rem 0;
+    padding: 1.5rem; */
     backdrop-filter: blur(10px);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     width: 70%;
@@ -125,12 +137,13 @@ section {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 }
-
 section:hover{
     transform: scale(1.05);
 }
-
 textarea {
+    /* width: 100%;
+    padding: 0.5rem;
+    border: none; */
     width: 80%;
     border: 2px solid rgba(255, 255, 255, 0.4);
     outline: none;
@@ -141,11 +154,9 @@ textarea {
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
     padding: 10px;
 }
-
 textarea:focus{
     outline: 2px solid rgb(250, 112, 135);
 }
-
 button {
     margin-top: 1rem;
     padding: 0.5rem 1rem;
@@ -157,17 +168,14 @@ button {
     font-size: 1rem;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
 }
-
 button:hover {
     background-color: #d51948;
 }
-
 footer {
     padding: 1rem;
     background: rgba(0, 0, 0, 0.3);
     margin-top: 2rem;
 }
-
 /* Modal Styles */
 .modal {
     display: none; /* Hidden by default */
@@ -184,7 +192,6 @@ footer {
     transform: scale(0.8); /* Start smaller */
     animation: pop-up 0.5s ease-out forwards; /* Apply the pop-up animation */
 }
-
 #hearts-canvas {
     position: fixed;
     top: 0;
@@ -194,7 +201,6 @@ footer {
     pointer-events: none; /* Makes sure it doesn't interfere with clicks */
     z-index: 2; /* Ensure it shows above other elements */
 }
-
 .modal-content {
     background-color: rgba(255, 255, 255, 0.4);
     padding: 20px;
@@ -206,7 +212,7 @@ footer {
     transition: 1s;
     border: 2px solid rgba(255, 255, 255, 0.5);
     animation: pop-up 0.3s ease-out;
-    display: inherit;
+    display:inherit;
 }
 
 .close {
@@ -217,13 +223,13 @@ footer {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    display: inherit;
+    display:inherit;
 }
+
 
 .modal.show {
     display: flex; /* Show the modal with flex layout */
 }
-
 /* Animation for Modal */
 @keyframes pop-up {
     from {
