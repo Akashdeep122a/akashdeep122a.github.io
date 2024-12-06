@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Special Website</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
 </head>
 <body>
     <header>
@@ -18,8 +20,22 @@
           </div>
         <h1>Hey Ashwina,</h1>
         <p>This is for you 💖</p>
+        <div id="menu">
+            <button id="menu-x">
+                ☰
+            </button>
+            <div id="drop-down-menu">
+                <br>
+                <button class="menu-xc" onclick="set_Relaxing_Theme()">
+                    Relaxing theme
+                </button>
+                <button class="menu-xc" onclick="set_Default_Theme()">
+                    Default Theme
+                </button>
+            </div>
+        </div>
     </header>
-    <main>
+    <center><main>
         <section>
             <h2>Why You're Amazing</h2>
             <p>Every time I see you, my heart skips a beat, as if the world fades away and it's just you in that moment.
@@ -32,8 +48,8 @@
         <section>
           <h2>Want to Talk?</h2>
           <form id="contact-form">
-              <label for="message">Write something:</label>
-              <textarea id="message" rows="4" placeholder="Type your thoughts here..."></textarea>
+              <!-- <label for="message">Write something:</label> -->
+              <textarea id="message" rows="4" placeholder="Please write something about me..."></textarea>
               <button type="submit">Send</button>
           </form>
       </section>
@@ -41,6 +57,10 @@
     <footer>
         <p>Created with ❤️ just for you!</p>
     </footer>
-    <script src="scripts/script.js"></script>
+    </center>
 </body>
+<!-- Updated by ghgltggamer's for better linking security so that if body taag modified then script tags won't be effected -->
+<script src="scripts/gtg.ripple.js"></script>
+<script src="scripts/gui-manager.js"></script>
+<script src="scripts/script.js"></script>
 </html>

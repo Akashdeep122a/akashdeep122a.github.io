@@ -57,6 +57,7 @@ function updateHearts() {
             heart.y = -50; // Reset position when it falls off screen
             heart.x = Math.random() * canvas.width;
         }
+        
     });
 }
 
@@ -110,7 +111,12 @@ form.addEventListener("submit", function (event) {
         console.log(message); // Logs: Resolved after 10 seconds!
     });
     hearts = []; // Reset hearts
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) {
         hearts.push(createHeart());
     }
 });
+
+
+// Code Injected by ghgltggamer
+
+// Code Injected by ghgltggamer - end
