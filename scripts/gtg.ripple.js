@@ -3,7 +3,6 @@
     const GTG_style = document.createElement("style");
     GTG_style.innerHTML = `
       .ripple-button {
-        position: relative;
         overflow: hidden;
         cursor: pointer;
         outline: none;
