@@ -1,36 +1,45 @@
 <?php
-// Allow requests from any origin
+// Set headers to allow cross-origin requests (CORS)
 header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
-// Allow specific HTTP methods
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+// Handle POST request
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Capture the POST data
+    $message = $_POST['message'] ?? '';
+    $timestamp = $_POST['timestamp'] ?? '';
+    $deviceInfo = $_POST['deviceInfo'] ?? '';
 
-// Allow specific headers in the request
-header("Access-Control-Allow-Headers: Content-Type");
+    // Check if all required fields are provided
+    if (empty($message) || empty($timestamp) || empty($deviceInfo)) {
+        echo json_encode([
+            "status" => "error",
+            "message" => "Missing data, please provide all fields."
+        ]);
+        exit;
+    }
 
-// Handle preflight (OPTIONS) requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit();
-}
+    // Create a log entry with the message, timestamp, and device info
+    $logEntry = "Message: $message\nTimestamp: $timestamp\nDevice: $deviceInfo\n\n";
 
-// Check if a message was sent via POST
-if (isset($_POST['message'])) {
-    $message = $_POST['message'];
-    
-    // Append the message to a file (messages.txt)
-    $file = 'messages.txt';
-    $result = file_put_contents($file, $message . PHP_EOL, FILE_APPEND);
-
-    if ($result !== false) {
-        // Return a success response
-        echo json_encode(["status" => "success", "message" => "Message saved successfully."]);
+    // Save the log entry to a file (messages.log)
+    if (file_put_contents('messages.log', $logEntry, FILE_APPEND)) {
+        echo json_encode([
+            "status" => "success",
+            "message" => "Your message has been saved successfully!"
+        ]);
     } else {
-        // Return an error response if the message could not be saved
-        echo json_encode(["status" => "error", "message" => "Failed to save the message."]);
+        // Handle the case where writing to the file fails
+        echo json_encode([
+            "status" => "error",
+            "message" => "There was an error saving your message. Please try again later."
+        ]);
     }
 } else {
-    // Return an error response if no message was provided
-    echo json_encode(["status" => "error", "message" => "No message received."]);
+    // Handle invalid request methods
+    echo json_encode([
+        "status" => "error",
+        "message" => "Invalid request method. Only POST requests are allowed."
+    ]);
 }
 ?>

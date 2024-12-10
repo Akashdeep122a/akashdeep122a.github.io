@@ -1,49 +1,46 @@
 <?php
-// File where messages are stored
-$file = 'messages.txt';
-?>
+// Set headers to allow cross-origin requests (CORS)
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json");
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saved Messages</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            margin: 20px;
+// Check if the messages.log file exists
+$logFile = 'messages.log';
+if (file_exists($logFile)) {
+    // Read the file's contents
+    $logContents = file_get_contents($logFile);
+
+    // Split the log into individual messages (separated by double newlines)
+    $messages = explode("\n\n", $logContents);
+
+    // Create an array to store structured messages
+    $responseMessages = [];
+
+    foreach ($messages as $message) {
+        if (!empty($message)) {
+            // Split each message into lines and extract message details
+            $lines = explode("\n", $message);
+            $messageText = $lines[0] ?? 'No message';
+            $timestamp = $lines[1] ?? 'No timestamp';
+            $deviceInfo = $lines[2] ?? 'No device info';
+
+            $responseMessages[] = [
+                'message' => $messageText,
+                'timestamp' => $timestamp,
+                'device' => $deviceInfo
+            ];
         }
-        h1 {
-            text-align: center;
-        }
-        .message {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #fff;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .timestamp {
-            font-size: 0.8em;
-            color: #666;
-        }
-    </style>
-</head>
-<body>
-    <h1>Saved Messages</h1>
-    <?php
-    if (file_exists($file)) {
-        $messages = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($messages as $message) {
-            echo "<div class='message'>" . htmlspecialchars($message) . "</div>";
-        }
-    } else {
-        echo "<p>No messages found.</p>";
     }
-    ?>
-</body>
-</html>
+
+    // Send the response with the messages
+    echo json_encode([
+        'status' => 'success',
+        'messages' => $responseMessages
+    ]);
+} else {
+    // If the file doesn't exist, return an error message
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'No messages found.'
+    ]);
+}
+?>

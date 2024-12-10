@@ -96,32 +96,53 @@ form.addEventListener("submit", function (event) {
     const message = messageInput.value.trim();
 
     if (message) {
+        // Generate timestamp
+        const timestamp = new Date().toISOString(); // ISO format for timestamp
+        
+        // Get device information
+        const deviceInfo = `${navigator.platform} - ${navigator.userAgent}`;
+
+        // Send the data to the PHP script
         fetch('http://192.168.1.2/save_message.php', { // Replace with your actual PHP script URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: new URLSearchParams({ message: message })
+            body: new URLSearchParams({
+                message: message,
+                timestamp: timestamp,
+                deviceInfo: deviceInfo
+            })
         })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    popupMessage.textContent = "Thank you for sharing! I'll be waiting for your reply. 😊";
-                } else {
-                    popupMessage.textContent = "An error occurred. Please try again later. 😊";
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.status === "success") {
+                    popupMessage.textContent = data.message || "Thank you for sharing! I'll be waiting for your reply. 😊";
+                } else {
+                    popupMessage.textContent = data.message || "An error occurred. Please try again later. 😊";
+                }
+                popupMessage.style.color = "black";
                 showModal();
             })
             .catch((error) => {
                 console.error('Error:', error);
                 popupMessage.textContent = "An error occurred. Please try again later. 😊";
+                popupMessage.style.color = "red";
                 showModal();
             });
     } else {
         popupMessage.textContent = "Please write something before sending. 😊";
+        popupMessage.style.color = "black";
         showModal();
     }
 });
+
+
 
 
 

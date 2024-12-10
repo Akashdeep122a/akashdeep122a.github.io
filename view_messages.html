@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Messages</title>
+    <style>
+        /* Styling for the message view */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+        .message-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .message {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .message strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .message .timestamp, .message .device {
+            font-size: 0.9em;
+            color: #888;
+        }
+        #loading {
+            text-align: center;
+            font-size: 1.2em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>View All Messages</h1>
+
+    <!-- Container for displaying messages -->
+    <div id="messages-container" class="message-container">
+        <div id="loading">Loading messages...</div>
+    </div>
+
+    <script>
+        // Fetch messages from the PHP script
+        fetch('http://192.168.1.2/view_messages.php') // Replace with your actual PHP script URL
+            .then((response) => response.json())
+            .then((data) => {
+                const messagesContainer = document.getElementById('messages-container');
+                const loadingText = document.getElementById('loading');
+                
+                // Hide loading text
+                loadingText.style.display = 'none';
+
+                if (data.status === 'success' && data.messages.length > 0) {
+                    // Loop through and display each message
+                    data.messages.forEach((msg) => {
+                        const messageElement = document.createElement('div');
+                        messageElement.classList.add('message');
+                        
+                        // Create HTML for each message
+                        messageElement.innerHTML = `
+                            <strong>Message:</strong> ${msg.message} <br>
+                            <span class="timestamp"><strong>Timestamp:</strong> ${msg.timestamp}</span><br>
+                            <span class="device"><strong>Device:</strong> ${msg.device}</span><br>
+                        `;
+                        
+                        messagesContainer.appendChild(messageElement);
+                    });
+                } else {
+                    messagesContainer.innerHTML = "<p>No messages found.</p>";
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching messages:', error);
+                const messagesContainer = document.getElementById('messages-container');
+                messagesContainer.innerHTML = "<p>Error loading messages. Please try again later.</p>";
+            });
+    </script>
+</body>
+</html>
