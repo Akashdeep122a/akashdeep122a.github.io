@@ -94,27 +94,35 @@ function hideModal() {
 form.addEventListener("submit", function (event) {
     event.preventDefault();
     const message = messageInput.value.trim();
+
     if (message) {
-        popupMessage.textContent = "Thank you for sharing! I'll be waiting for your reply. 😊";
+        fetch('http://192.168.1.2/save_message.php', { // Replace with your actual PHP script URL
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({ message: message })
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    popupMessage.textContent = "Thank you for sharing! I'll be waiting for your reply. 😊";
+                } else {
+                    popupMessage.textContent = "An error occurred. Please try again later. 😊";
+                }
+                showModal();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                popupMessage.textContent = "An error occurred. Please try again later. 😊";
+                showModal();
+            });
     } else {
         popupMessage.textContent = "Please write something before sending. 😊";
+        showModal();
     }
-    popupMessage.style.color = "black";
-    showModal() // Show the modal
-    const promise = new Promise((resolve) => {
-        setTimeout(() => {
-            resolve('Resolved after 5 seconds!');
-        }, 5000); // 10 seconds
-    });
-    promise.then((message) => {
-        hideModal();
-        console.log(message); // Logs: Resolved after 10 seconds!
-    });
-    // hearts = []; // Reset hearts
-    // for (let i = 0; i < 15; i++) {
-    //     hearts.push(createHeart());
-    // }
 });
+
 
 
 // Code Injected by ghgltggamer
